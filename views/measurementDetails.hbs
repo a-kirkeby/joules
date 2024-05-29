@@ -1,0 +1,296 @@
+<div class="row">
+  <div class="col-lg-12 grid-margin">
+    <h2><a href="/websites/{{ measurement.websiteSlug }}">{{ measurement.websiteName }}</a> > Measurement {{ measurement.measurementId }}</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Summary</h4>
+        <p class="card-description">
+          {{ longDate measurement.createdDate }}<br />
+          Measured {{ resources.length }} resources across {{ resourceTypes.length }} resource types.<br />
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="statistics-details d-flex align-items-center justify-content-between">
+          <div class="text-start">
+            <p class="statistics-title">Change</p>
+            <h3 class="rate-percentage text-center">{{ measurement.transferSizeChangePct }}%</h3>
+            <p class="text-success"><span>&nbsp;</span></p>
+          </div>
+          <div class="text-start">
+            <p class="statistics-title">Resources</p>
+            <h3 class="rate-percentage text-center">{{ resources.length }}</h3>
+            <p class="text-success"><span>&nbsp;</span></p>
+          </div>
+          <div class="d-none d-md-block text-start">
+            <p class="statistics-title">Size</p>
+            <h3 class="rate-percentage">{{ bytes measurement.totalTransferSize }}</h3>
+            <p class="text-success"><span>Change of {{ measurement.transferSizeChange }} from {{ measurement.previousTransferSize }}b</span></p>
+          </div>
+          <div class="text-start">
+            <p class="statistics-title">Emissions</p>
+            <h3 class="rate-percentage">{{ co2 measurement.totalGramsCO2 }}</h3>
+            <p class="text-success"><span>Change of {{ fixed 2 measurement.gramsCO2Change }} from {{ measurement.previousGramsCO2 }}g</span></p>
+          </div>
+          <div class="d-none d-md-block text-start">
+            <p class="statistics-title">Power</p>
+            <h3 class="rate-percentage">{{ kw measurement.totalKWHours }}</h3>
+            <p class="text-success"><span>Change of {{ fixed 2 measurement.kWHoursChange }} from {{ measurement.previousKWHours }} kW</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Resource Types</h4>
+        <p class="card-description">
+          Resources broken down by type for measurement {{ measurement.measurementId }}
+        </p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Resources</th>
+                <th>Size</th>
+                <th>Power</th>
+                <th>Emissions</th>
+                <th>Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each resourceTypes}}
+              <tr>
+                <td>{{ initiatorType }}</td>
+                <td>{{ resourceCount }}</td>
+                <td>{{ bytes totalTransferSize }}</td>
+                <td>{{ kw totalKWHours }}</td>
+                <td>{{ co2 totalGramsCO2 }}</td>
+                <td>{{ typeContribution }}%</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Visits</h4>
+        <p class="card-description">
+          Routes visited during measurement {{ measurement.measurementId }} and their contributions to the total emissions.
+        </p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Resources</th>
+                <th>Size</th>
+                <th>Power</th>
+                <th>Emissions</th>
+                <th>Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each pages}}
+              <tr>
+                <td>{{ pageUrl }}</td>
+                <td>{{ resourceCount }}</td>
+                <td>{{ bytes transferSize }}</td>
+                <td>{{ kw kWHours }}</td>
+                <td>{{ co2 gramsCO2 }}</td>
+                <td>{{ emissionsContribution }}%</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Resources</h4>
+        <p class="card-description">
+          Individual resources found in measurement {{ measurement.measurementId }} and their contributions to the total emissions.
+        </p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Visits</th>                
+                <th>Size</th>
+                <th>Power</th>
+                <th>Emissions</th>
+                <th>Contribution</th>
+                <th>Cache Savings</th>
+                <th>Cache Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each resources}}
+              <tr>
+                <td><span style="cursor: pointer" title="{{ name }}">{{ clip 50 name }}</span></td>
+                <td>{{ visitCount }}</td>
+                <td>{{ bytes transferSize }}</td>
+                <td>{{ kw kWHours }}</td>
+                <td>{{ co2 gramsCO2 }}</td>
+                <td>{{ emissionsContribution }}%</td>
+                <td>{{ bytes cacheSavings }}</td>
+                <td>{{ fixed 2 cacheRate }}%</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Network</h4>
+        <p class="card-description">
+          Network calls made during measurement {{ measurement.measurementId }} and their contributions to the total emissions.
+        </p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Route</th>
+                <th>Type</th>
+                <th>Delivery</th>
+                <th>Size</th>
+                <th>Power</th>
+                <th>Emissions</th>
+                <th>Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each network}}
+              <tr>
+                <td><span style="cursor: pointer" title="{{ name }}">{{ clip 50 name }}</span></td>
+                <td>{{ pageUrl }}</td>
+                <td>{{ initiatorType }}</td>
+                <td>{{ delivery isCache}}</td>
+                <td>{{ bytes transferSize }}</td>
+                <td>{{ kw kWHours }}</td>
+                <td>{{ co2 gramsCO2 }}</td>
+                <td>{{ emissionsContribution }}%</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  (() => {
+    var decodedJson = decodeURIComponent("{{{pieData}}}");
+    var pieData = JSON.parse(decodedJson);
+
+
+    /* large pie/donut chart */
+    var chPie = document.getElementById("chPie");
+    if (chPie) {
+      // chart colors
+      new Chart(chPie, {
+        type: 'pie',
+        data: {
+          labels: Object.keys(pieData),
+          datasets: [
+            {
+              borderWidth: 0,
+              data: Object.values(pieData),
+            },
+          ]
+        },
+        options: { layout: { padding: 0 }, legend: { display: false }, cutoutPercentage: 80 }
+      });
+    }
+
+    var segmentJson = decodeURIComponent("{{{segmentPieData}}}");
+    var segmentData = JSON.parse(segmentJson);
+    console.log(segmentData);
+    /* large pie/donut chart */
+    var segmentPie = document.getElementById("chSegmentPie");
+    if (segmentPie) {
+      // chart colors
+      new Chart(segmentPie, {
+        type: 'pie',
+        data: {
+          labels: Object.keys(segmentData),
+          datasets: [
+            {
+              borderWidth: 0,
+              data: Object.values(segmentData),
+            },
+          ]
+        },
+        options: { layout: { padding: 0 }, legend: { display: false }, cutoutPercentage: 80 }
+      });
+    }
+  })()
+
+
+  const startMeasurement = async (websiteId) => {
+    console.log('Starting measurement for', { websiteId })
+
+    const button = document.getElementById('button-' + websiteId)
+    const oldText = button.textContent
+    const buttons = document.querySelectorAll('button')
+
+    button.textContent = 'Running...'
+    buttons.forEach(button => button.disabled = true)
+
+    const result = await fetch(`/api/websites/${websiteId}/measurements`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        action: 'START_MEASUREMENT',
+        initiator: 'aki',
+        source: 'administration',
+      })
+    })
+
+    buttons.forEach(button => button.disabled = false)
+    button.textContent = oldText
+    location.reload()
+  }
+</script>

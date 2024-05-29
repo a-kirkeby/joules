@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col grid-margin">
+    <h2>{{ website.name }}</h2>
+    <p class="text-muted">{{ website.description }}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Summary</h4>
+        <p class="card-description">
+          Created: {{ longDate website.createdDate }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">New measurement</h4>
+        <p class="card-description">
+          Run a new measurement and analyse the results in the measurements section
+        </p>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="button-{{website.websiteId}}"
+          onclick="startMeasurement({{website.websiteId}})">Start new measurement</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Latest measurement</h4>
+        <p class="card-description">
+          Review the latest measurement for this website and view the resources
+        </p>
+        <a href="/websites/{{website.slug}}/measurements/{{latestMeasurement.measurementId}}"
+          class="btn btn-primary">Review latest measurement</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-lg-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="statistics-details d-flex align-items-center justify-content-between">
+          <div class="text-center">
+            <p class="statistics-title">Measurements</p>
+            <h3 class="rate-percentage">{{ measurements.length }}</h3>
+            <p class="text-success d-flex"><span>&nbsp;</span></p>
+          </div>
+          <div class="d-none d-md-block text-center">
+            <p class="statistics-title">Emissions</p>
+            <h3 class="rate-percentage">{{ co2 summary.totalGramsCO2 }}</h3>
+            <p class="text-success"><span>per visit</span></p>
+          </div>
+          <div class="d-none d-md-block text-center">
+            <p class="statistics-title">Power</p>
+            <h3 class="rate-percentage">{{ kw summary.totalKWHours }}</h3>
+            <p class="text-success"><span>latest measurement</span></p>
+          </div>
+          <div class="d-none d-md-block text-center">
+            <p class="statistics-title">Avg. Emissions</p>
+            <h3 class="rate-percentage">{{ co2 summary.averageGramsCO2 }}</h3>
+            <p class="text-success"><span>across measurements</span></p>
+          </div>
+          <div class="d-none d-md-block text-center">
+            <p class="statistics-title">Avg. Power</p>
+            <h3 class="rate-percentage">{{ kw summary.averageKWHours }}</h3>
+            <p class="text-success"><span>across measurements</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Measurements -->
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ measurements.length }} Measurements</h4>
+        <p class="card-description">
+          Track and manage measurements.
+        </p>
+        <div class="table-responsive">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th class="text-center">Resources</th>
+                <th>Size</th>
+                <th>Power</th>
+                <th>Emissions</th>
+                <th>Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each measurements}}
+              <tr>
+                <td><a href="/websites/{{../website.slug}}/measurements/{{measurementId}}">{{ measurementId }}</a>
+                </td>
+                <td>{{ shortDate createdDate }}</td>
+                <td class="text-center">{{ resourceCount }}</td>
+                <td>{{ bytes totalTransferSize }}</td>
+                <td>{{ kw totalKWHours }}</td>
+                <td>{{ co2 totalGramsCO2 }}</td>
+                <td>
+                  {{#if (gt transferSizeChangePct 0) }}
+                  {{ round transferSizeChangePct }}% ({{isTrue hasChangeIncrease '+' '-' }}{{bytes transferSizeChange}})
+                  {{/if}}
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const startMeasurement = async (websiteId) => {
+    console.log('Starting measurement for', { websiteId })
+
+    const button = document.getElementById('button-' + websiteId)
+    const oldText = button.textContent
+    const buttons = document.querySelectorAll('button')
+
+    button.textContent = 'Running...'
+    buttons.forEach(button => button.disabled = true)
+
+    const result = await fetch(`/api/websites/${websiteId}/measurements`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        action: 'START_MEASUREMENT',
+        initiator: 'aki',
+        source: 'administration',
+      })
+    }).then(res => res.json())
+
+
+    buttons.forEach(button => button.disabled = false)
+    button.textContent = oldText
+    location.href = `${location.href}/measurements/${result.measurementId}`
+  }
+</script>

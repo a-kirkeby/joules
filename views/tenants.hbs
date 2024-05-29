@@ -1,0 +1,12 @@
+<h1>Tenants</h1>
+
+<p>We have {{ tenants.length }} tenants on the system</p>
+
+{{#each tenants }}
+<div>
+  {{ tenantId }} - {{ name }} - {{ websiteCount }} websites - {{ description }}
+</div>
+{{/each}}
+
+<script>
+</script>

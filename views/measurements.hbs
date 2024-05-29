@@ -1,0 +1,126 @@
+
+<div class="row">
+  <div class="col-lg-12 grid-margin">
+    <h2>Measurements</h2>
+    <p class="text-muted">Review the individual measurements created across your websites during monitoring</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-9 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="statistics-details d-flex align-items-center justify-content-between">
+          <div>
+            <p class="statistics-title">Measurements</p>
+            <h3 class="rate-percentage">{{summary.measurementCount}}</h3>
+            <p class="text-success d-flex">&nbsp;</p>
+          </div>
+          <div>
+            <p class="statistics-title">Latest Emissions</p>
+            <h3 class="rate-percentage">{{ co2 summary.totalGramsCO2}}</h3>
+            <p class="text-muted d-flex">&nbsp;</p>
+          </div>
+          <div>
+            <p class="statistics-title">Latest Size</p>
+            <h3 class="rate-percentage">{{ bytes summary.totalTransferSize }}</h3>
+            <p class="text-muted d-flex">&nbsp;</p>
+          </div>
+          <div>
+            <p class="statistics-title">Latest Power</p>
+            <h3 class="rate-percentage">{{ kw summary.totalKWHours }}</h3>
+            <p class="text-muted d-flex">&nbsp;</p>
+          </div>
+          <div>
+            <p class="statistics-title">Change</p>
+            <h3 class="rate-percentage">{{ summary.transferSizeChangePct }}%</h3>
+            <p class="text-muted d-flex">&nbsp;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">New measurement</h4>
+        <p class="card-description">
+          Run a new measurement and analyse the results in the measurements section
+        </p>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="button-{{website.websiteId}}"
+          onclick="startMeasurement({{website.websiteId}})">Start new measurement</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ measurements.length }} Measurements</h4>
+        <p class="card-description">
+          Track and manage measurements.
+        </p>
+        <div class="table-responsive">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Resources</th>
+                <th>Size</th>
+                <th>Power</th>
+                <th>Emissions</th>
+                <th>Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each measurements}}
+              <tr>
+                <td><a href="/websites/{{slug}}/measurements/{{measurementId}}">{{ measurementId }}</a></td>
+                <td>{{ shortDate createdDate }}</td>
+                <td>{{ resourceCount }} ({{resourceTypeCount}} groups)</td>
+                <td>{{ bytes totalTransferSize }}</td>
+                <td>{{ kw totalGramsCO2 }}</td>
+                <td>{{ co2 totalGramsCO2 }}</td>
+                <td>{{ transferSizeChangePct }}%</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const startMeasurement = async (websiteId) => {
+    console.log('Starting measurement for', { websiteId })
+
+    const button = document.getElementById('button-' + websiteId)
+    const oldText = button.textContent
+    const buttons = document.querySelectorAll('button')
+
+    button.textContent = 'Running...'
+    buttons.forEach(button => button.disabled = true)
+
+    const result = await fetch(`/api/websites/${websiteId}/measurements`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        action: 'START_MEASUREMENT',
+        initiator: 'aki',
+        source: 'administration',
+      })
+    }).then(res => res.json())
+
+
+    buttons.forEach(button => button.disabled = false)
+    button.textContent = oldText
+    location.href = `${location.href}/measurements/${result.measurementId}`
+  }
+</script>
