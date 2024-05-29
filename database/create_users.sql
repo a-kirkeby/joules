@@ -1,0 +1,10 @@
+
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+    userId INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    tenantId INT NOT NULL,
+    email VARCHAR(255),
+    password VARCHAR(255),
+    createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT UC_email UNIQUE (email)
+);
