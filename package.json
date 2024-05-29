@@ -1,33 +1,15 @@
 {
-  "name": "energy-monitor",
+  "name": "client2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "client1.js",
   "type": "module",
   "scripts": {
-    "start": "ENV=local PORT=4000 nodemon server.js",
-    "dev": "ENV=dev PORT=4000 nodemon server.js",
-    "monitor:1": "node montiorMysql 1",
-    "monitor:2": "node monitorMysql 2",
-    "monitor:copencloud": "node monitorMysql 5",
-    "test": "mocha"
+    "dev": "PORT=4002 nodemon client.js"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "nodemonConfig": {
-    "ext": "js,html,css"
-  },
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "express-handlebars": "^7.1.2",
-    "mocha": "^10.4.0",
-    "mysql2": "^3.9.1",
-    "node-fetch": "^3.3.2",
-    "puppeteer": "^21.4.1",
-    "puppeteer-core": "^21.4.1"
+    "express": "^4.18.2"
   }
 }

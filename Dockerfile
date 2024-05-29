@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:21-alpine
+FROM node:21-alpine3.18
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm install --verbose
+RUN npm install
 
 # Copy the rest of the application code to the working directory
 COPY . .
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "server.js"]
+CMD ["node", "client.js"]
