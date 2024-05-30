@@ -12,7 +12,8 @@ export default app => {
     const slug = name.toLowerCase().replace(/ /g, '-')
     const { insertId } = await mysql.query(`
       INSERT INTO Websites (tenantId, name, slug, url, description) 
-      VALUES (1, "${name}", "${slug}" , "${url}", "${description.replace("'", "\'")}");`)
+      VALUES (1, '${name}', '${slug}', '${url}', '${description.replace(/'/g, "\\'")}');
+    `)
     res.sendStatus(200)
   })
 
