@@ -5,3 +5,4 @@ CREATE TABLE Tenants (
     description TEXT,
     createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO Tenants (name, description) VALUES ('NoveltyGraph', 'Our first tenant is us :)');

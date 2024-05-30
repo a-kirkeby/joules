@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Websites;
 CREATE TABLE Websites (
     websiteId INT PRIMARY KEY AUTO_INCREMENT,
     tenantId INT,

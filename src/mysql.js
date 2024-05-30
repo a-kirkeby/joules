@@ -1,3 +1,4 @@
+import fs from 'fs';
 import mysql from 'mysql2/promise';
 
 // TODO: Move to true env file
@@ -15,9 +16,10 @@ const doCredentials = {
   port: process.env.MYSQL_PORT || 25060,
   database: process.env.MYSQL_DB || 'noveltygraph',
   ssl: {
-    ca: './database/ca-certificate.crt',
+    ca: fs.readFileSync(process.env.DB_ROOT_CERT || './database/ca-certificate.crt')
   }
 }
+
 
 // Create MySQL connection
 const connection = await mysql.createConnection(process.env.ENV == 'DEV' ? doCredentials : localCredentials);
