@@ -13,8 +13,14 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose the port the app runs on
-EXPOSE 3000
+# Connect environment variables from the host
+ENV MYSQL_HOST=${MYSQL_HOST}
+ENV MYSQL_PORT=${MYSQL_PORT}
+ENV MYSQL_USER=${MYSQL_USER}
+ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
+ENV MYSQL_DB=${MYSQL_DB}
+ENV DB_ROOT_CERT=${DB_ROOT_CERT}
+ENV APP_PORT=${APP_PORT}
 
 # Command to run the application
-CMD ["node", "client.js"]
+CMD ["node", "server.js"]

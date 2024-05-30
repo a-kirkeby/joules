@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "source .env.local && nodemon server.js",
-    "dev": "PORT=80 server.js",
+    "dev": "source .env.development && nodemon server.js",
     "monitor:1": "node montiorMysql 1",
     "monitor:2": "node monitorMysql 2",
     "monitor:copencloud": "node monitorMysql 5",
@@ -27,7 +27,7 @@
     "mocha": "^10.4.0",
     "mysql2": "^3.9.1",
     "node-fetch": "^3.3.2",
-    "puppeteer": "^21.4.1",
-    "puppeteer-core": "^21.4.1"
+    "puppeteer": "^22.10.0",
+    "puppeteer-core": "^22.10.0"
   }
 }
