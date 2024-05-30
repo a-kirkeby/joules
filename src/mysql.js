@@ -2,7 +2,7 @@ import fs from 'fs';
 import mysql from 'mysql2/promise';
 
 // TODO: Move to true env file
-const localCredentials = {
+const credentials = {
   host: process.env.MYSQL_HOST || 'localhost',
   user: process.env.MYSQL_USER || 'aki',
   password: process.env.MYSQL_PASSWORD || 'R0bertParr',
@@ -22,7 +22,7 @@ const doCredentials = {
 
 
 // Create MySQL connection
-const connection = await mysql.createConnection(process.env.NODE_ENV == 'local' ? localCredentials : doCredentials);
+const connection = await mysql.createConnection(credentials);
 
 export const columnNames = {
   NAME: 'name',
