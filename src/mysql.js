@@ -13,7 +13,10 @@ const doCredentials = {
   user: process.env.MYSQL_USER || 'noveltygraph',
   password: process.env.MYSQL_PASSWORD || 'AVNS_ToqtaskMe37Jo2Lm1EB',
   port: process.env.MYSQL_PORT || 25060,
-  database: process.env.MYSQL_DB || 'noveltygraph'
+  database: process.env.MYSQL_DB || 'noveltygraph',
+  ssl: {
+    ca: './database/ca-certificate.crt',
+  }
 }
 
 // Create MySQL connection
