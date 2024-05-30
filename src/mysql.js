@@ -22,7 +22,7 @@ const doCredentials = {
 
 
 // Create MySQL connection
-const connection = await mysql.createConnection(process.env.ENV == 'DEV' ? doCredentials : localCredentials);
+const connection = await mysql.createConnection(process.env.NODE_ENV == 'local' ? localCredentials : doCredentials);
 
 export const columnNames = {
   NAME: 'name',

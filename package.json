@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "ENV=local PORT=4000 nodemon server.js",
-    "dev": "ENV=DEV PORT=80 server.js",
+    "start": "NODE_ENV=local PORT=4000 nodemon server.js",
+    "dev": "PORT=80 server.js",
     "monitor:1": "node montiorMysql 1",
     "monitor:2": "node monitorMysql 2",
     "monitor:copencloud": "node monitorMysql 5",
