@@ -226,7 +226,7 @@ const pageVisit = async (browser, websiteId, tenantId, siteName, url, measuremen
     
     // filter out paint and visibility-state entries as they are not needed for measuring
     const pageData = await page.evaluate(() => JSON.stringify(performance.getEntries()))
-    const perfEntries = JSON.parse(pageData).filter(x => !['paint', 'visibility-state'].includes(x.entryType));
+    const perfEntries = JSON.parse(pageData).filter(x => !['paint', 'visibility-state','long-animation-frame'].includes(x.entryType));
 
     // map collected payload sizes onto their matching perf entries
     perfEntries.map(x => {

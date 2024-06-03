@@ -5,7 +5,7 @@
   "main": "client1.js",
   "type": "module",
   "scripts": {
-    "dev": "PORT=4002 nodemon client.js"
+    "start": "PORT=4002 nodemon client.js"
   },
   "author": "",
   "license": "ISC",
