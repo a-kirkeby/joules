@@ -172,6 +172,13 @@ const pageVisit = async (browser, websiteId, tenantId, siteName, url, measuremen
         const url = request.url().toLowerCase();
         const resourceType = request.resourceType();
 
+        // skip chrome resources, as they are not needed
+        if (url.startsWith('chrome')) {
+            console.log('--- skipping chrome resource', url, resourceType)
+            request.abort()
+            return
+        }
+
         // add blocking of certain resources here
         request.continue()
     })
