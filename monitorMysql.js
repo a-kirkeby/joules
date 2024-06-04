@@ -174,7 +174,7 @@ const pageVisit = async (browser, websiteId, tenantId, siteName, url, measuremen
 
         // skip chrome resources, as they are not needed
         if (url.startsWith('chrome')) {
-            console.log('--- skipping chrome resource', url, resourceType)
+            //console.log('--- skipping chrome resource', url, resourceType)
             request.abort()
             return
         }
@@ -267,7 +267,7 @@ const pageVisit = async (browser, websiteId, tenantId, siteName, url, measuremen
     })
 
     // send the data to the database
-    console.log('sending data to mysql', { measurementId, perfEntries, requestPayloads })
+    //console.log('sending data to mysql', { measurementId, perfEntries, requestPayloads })
     await sendMysql2(websiteId, tenantId, measurementId, perfEntries)
 
     // if maxDepth is set and we're at the limit, don't go any deeper
@@ -332,18 +332,13 @@ export {
         console.log('Ran monitor, but no arguments. Exitting.')
         return
     }
-    const tenantId = 1
     const promises = []
 
     if (args.length > 0) {
-        // run the urls passed in
         args.forEach(url => promises.push(runSite(url)))
-        for (let i = 0; i < args.length; i++) {
-            await runSite(args[i])
-        }
     }
 
     await Promise.all(promises)
-    console.log('done running', promises.length, 'sites')
+    console.log('Done running', promises.length, 'sites')
     process.exit(0)
 })()
