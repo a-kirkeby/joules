@@ -91,31 +91,9 @@ export const measurementDetailsRoute = async (req, res) => {
     GROUP BY e.name
   `)
 
-  const network = await mysql.query(`
-    SELECT 
-      e.measurementId,
-      e.name,
-      e.pageUrl,
-      e.entryType,
-      e.initiatorType,
-      e.isCache,
-      e.transferSize,
-      e.kWHours,
-      e.gramsCO2,
-      e.emissionsContribution,
-      e.kWhoursDevice,
-      e.kWhoursNetwork,
-      e.kWhoursDataCenter,
-      e.gramsCO2Device,
-      e.gramsCO2Network,
-      e.gramsCO2DataCenter
-    FROM view_MeasurementEntriesModel1 e
-    WHERE e.websiteSlug = '${slug}' AND e.measurementId = ${req.params.measurementId}
-  `)
-
   const resourceTypes = await mysql.query(`
     SELECT  
-      initiatorType,
+      type,
       COUNT(measurementEntryID) AS resourceCount,
       IFNULL(SUM(transferSize),0) AS totalTransferSize,
       IFNULL(AVG(transferSize),0) AS averageTransferSize,
@@ -126,13 +104,12 @@ export const measurementDetailsRoute = async (req, res) => {
       IFNULL((SUM(transferSize) / (SELECT SUM(transferSize) FROM view_MeasurementEntriesModel1 WHERE measurementID = ${req.params.measurementId})) * 100,0) AS typeContribution 
     FROM view_MeasurementEntriesModel1
     WHERE measurementId = ${measurementId}
-    GROUP BY initiatorType
+    GROUP BY type
   `)
   
   const viewData = {
     measurement,
     resources,
-    network,
     resourceTypes,
     pages
   }

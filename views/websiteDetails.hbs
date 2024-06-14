@@ -112,11 +112,7 @@
                 <td>{{ bytes totalTransferSize }}</td>
                 <td>{{ kw totalKWHours }}</td>
                 <td>{{ co2 totalGramsCO2 }}</td>
-                <td>
-                  {{#if (gt transferSizeChangePct 0) }}
-                  {{ round transferSizeChangePct }}% ({{isTrue hasChangeIncrease '+' '-' }}{{bytes transferSizeChange}})
-                  {{/if}}
-                </td>
+                <td>{{ round transferSizeChangePct }}%</td>
               </tr>
               {{/each}}
             </tbody>
