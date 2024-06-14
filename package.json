@@ -7,7 +7,7 @@
   "scripts": {
     "start": "source .env && nodemon server.js",
     "dev": "source .env.development && nodemon server.js",
-    "monitor:1": "node montiorMysql 1",
+    "monitor:1": "node monitorMysql 1",
     "monitor:2": "node monitorMysql 2",
     "monitor:copencloud": "node monitorMysql 5",
     "monitor:dr": "node monitorMysql 3",
