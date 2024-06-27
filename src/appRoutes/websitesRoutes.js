@@ -63,7 +63,7 @@ export const websiteDetailsRoute = async (req, res) => {
       SUM(m.totalKWHours) as totalKWHours,
       AVG(m.totalKWHours) as averageKWHours
     FROM view_MeasurementsModel1 m
-    WHERE m.websiteId = 2
+    WHERE m.websiteSlug = '${req.params.slug}'
     GROUP BY m.websiteId
     LIMIT 1
   `)
@@ -91,7 +91,7 @@ export const websiteDetailsRoute = async (req, res) => {
       m.totalKWHoursDataCenter,
       (SELECT COUNT(*) FROM view_MeasurementEntriesModel1 WHERE measurementId = m.measurementId) as resourceCount
     FROM view_MeasurementsModel1 m
-    WHERE m.websiteId = ${website.websiteId}
+    WHERE m.websiteSlug = '${req.params.slug}'
     ORDER BY m.measurementId DESC
   `)
 

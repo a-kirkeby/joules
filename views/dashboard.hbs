@@ -10,11 +10,15 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab"
-                aria-selected="false">Audiences</a>
+                aria-selected="false">Apps</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab"
-                aria-selected="false">Demographics</a>
+                aria-selected="false">Divisions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab"
+                aria-selected="false">Corporate</a>
             </li>
             <li class="nav-item">
               <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab"
@@ -37,27 +41,27 @@
                   <div>
                     <p class="statistics-title">Emissions</p>
                     <h3 class="rate-percentage">{{co2 summary.totalGramsCO2 }}</h3>
-                    <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>-2.35%</span></p>
+                    {{!-- <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>-2.35%</span></p> --}}
                   </div>
                   <div class="d-none d-md-block">
                     <p class="statistics-title">Power</p>
                     <h3 class="rate-percentage">{{kw summary.totalKWHours }}</h3>
-                    <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>-2.8%</span></p>
+                    {{!-- <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>&nbsp;</span></p> --}}
                   </div>
                   <div>
                     <p class="statistics-title">Apps</p>
                     <h3 class="rate-percentage">{{summary.appCount}}</h3>
-                    <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
+                    {{!-- <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p> --}}
                   </div>
                   <div class="d-none d-md-block">
                     <p class="statistics-title">Active Apps</p>
                     <h3 class="rate-percentage">{{summary.activeAppCount}}</h3>
-                    <p class="text-success d-flex">&nbsp;</p>
+                    {{!-- <p class="text-success d-flex">&nbsp;</p> --}}
                   </div>
                   <div>
                     <p class="statistics-title">Measurements</p>
                     <h3 class="rate-percentage">{{summary.measurementCount}}</h3>
-                    <p class="text-success d-flex">&nbsp;</p>
+                    {{!-- <p class="text-success d-flex">&nbsp;</p> --}}
                   </div>
                 </div>
               </div>
@@ -71,8 +75,7 @@
                         <div class="d-sm-flex justify-content-between align-items-start">
                           <div>
                             <h4 class="card-title card-title-dash">Weekly Emissions</h4>
-                            <h5 class="card-subtitle card-subtitle-dash">Breakdown of emissions from page views per
-                              weekday, measured in gCO2e</h5>
+                            <h5 class="card-subtitle card-subtitle-dash">Breakdown of emissions from page views per weekday, in gCO2e</h5>
                           </div>
                           <div id="performance-line-legend"></div>
                         </div>

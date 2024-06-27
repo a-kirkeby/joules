@@ -21,6 +21,11 @@
     <div class="card">
       <div class="card-body">
         <div class="statistics-details d-flex align-items-center justify-content-between">
+          <div class="d-none d-md-block text-start">
+            <p class="statistics-title">Size</p>
+            <h3 class="rate-percentage">{{ bytes measurement.totalTransferSize }}</h3>
+            <p class="text-success"><span>Change from {{ bytes measurement.previousTransferSize }}</span></p>
+          </div>
           <div class="text-start">
             <p class="statistics-title">Change</p>
             <h3 class="rate-percentage text-center">{{ measurement.transferSizeChangePct }}%</h3>
@@ -31,20 +36,15 @@
             <h3 class="rate-percentage text-center">{{ resources.length }}</h3>
             <p class="text-success"><span>&nbsp;</span></p>
           </div>
-          <div class="d-none d-md-block text-start">
-            <p class="statistics-title">Size</p>
-            <h3 class="rate-percentage">{{ bytes measurement.totalTransferSize }}</h3>
-            <p class="text-success"><span>Change of {{ measurement.transferSizeChange }} from {{ measurement.previousTransferSize }}b</span></p>
-          </div>
           <div class="text-start">
             <p class="statistics-title">Emissions</p>
             <h3 class="rate-percentage">{{ co2 measurement.totalGramsCO2 }}</h3>
-            <p class="text-success"><span>Change of {{ fixed 2 measurement.gramsCO2Change }} from {{ measurement.previousGramsCO2 }}g</span></p>
+            <p class="text-success"><span>Changefrom {{ co2 measurement.previousGramsCO2 }}</span></p>
           </div>
           <div class="d-none d-md-block text-start">
             <p class="statistics-title">Power</p>
             <h3 class="rate-percentage">{{ kw measurement.totalKWHours }}</h3>
-            <p class="text-success"><span>Change of {{ fixed 2 measurement.kWHoursChange }} from {{ measurement.previousKWHours }} kW</span></p>
+            <p class="text-success"><span>Change from {{ kw measurement.previousKWHours }}</span></p>
           </div>
         </div>
       </div>

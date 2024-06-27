@@ -2,6 +2,7 @@ DROP VIEW IF EXISTS view_MeasurementsModel1;
 CREATE VIEW view_MeasurementsModel1 AS
 SELECT 
   m.*,
+  w.slug as websiteSlug,
   IFNULL(SUM(e.transferSize),0) as totalTransferSize,
   LAG(IFNULL(e.measurementId, 0), 1, 0) OVER w as previousMeasurementId,
   LAG(SUM(IFNULL(e.transferSize,0)), 1, 0) OVER w as previousTransferSize,
@@ -23,6 +24,7 @@ SELECT
   IFNULL(SUM(e.kWHoursDataCenter),0) AS totalKWHoursDataCenter
 FROM Measurements m
 LEFT JOIN view_MeasurementEntriesModel1 e ON m.measurementId = e.measurementID
+LEFT JOIN Websites w ON m.websiteId = w.websiteId
 GROUP BY m.measurementId, m.createdDate
 WINDOW w as (PARTITION BY m.websiteId ORDER BY m.measurementId)
 ORDER BY m.measurementId DESC;
