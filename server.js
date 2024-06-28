@@ -5,6 +5,7 @@ import cors from 'cors'
 
 import helpers from './src/templateHelpers.js'
 import registerApiRoutes from './src/apiRoutes.js'
+import { init } from './database/keyvaluestore/keyvaluestore.js'
 
 import { dashboardRoute } from './src/appRoutes/dashboardRoute.js'
 import { measurementDetailsRoute, measurementRoute } from './src/appRoutes/measurementRoutes.js'
@@ -51,7 +52,9 @@ app.get('/insights', addGlobalData, insightsRoute)
 app.get('*', (req, res) => res.render('404', { layout: 'login' }))
 
 
+init()
 registerApiRoutes(app)
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

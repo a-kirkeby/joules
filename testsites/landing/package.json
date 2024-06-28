@@ -1,0 +1,15 @@
+{
+  "name": "client2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client1.js",
+  "type": "module",
+  "scripts": {
+    "start": "PORT=4003 nodemon landing.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

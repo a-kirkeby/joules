@@ -1,0 +1,31 @@
+{
+  "user:1": {
+    "id": 1,
+    "name": "Anders Kirkeby",
+    "email": "aki@noveltygraph.com",
+    "createdDate": "2021-01-01T00:00:00Z"
+  },
+  "website:noveltygraph": {
+    "websiteId": 1,
+    "slug": "noveltygraph",
+    "name": "NoveltyGraph",
+    "desciption": "A graphing library",
+    "url": "https://noveltygraph.com",
+    "createdDate": "2021-01-01T00:00:00Z"
+  },
+  "website:noveltygraph:measurement:1": {
+    "measurementId": 1,
+    "websiteSlug": "noveltygraph",
+    "createdDate": "2021-01-01T00:00:00Z",
+    "entries": [
+      {
+        "value": 100,
+        "createdDate": "2021-01-01T00:00:00Z"
+      },
+      {
+        "value": 200,
+        "createdDate": "2021-01-02T00:00:00Z"
+      }
+    ]
+  }
+}

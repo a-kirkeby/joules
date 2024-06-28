@@ -1,4 +1,5 @@
 
+import { getWebsites } from '../database/keyvaluestore/keyvaluestore.js';
 import * as mysql from './mysql.js';
 
 const port = process.env.PORT || 4000
@@ -16,7 +17,8 @@ export const attachFullUrl = (req, res, next) => {
 
 export const addGlobalData = async (req, res, next) => {
   // for future shared data between routes
-  const websites = await mysql.query('SELECT * FROM Websites WHERE tenantId = 1')
+  //const websites = await mysql.query('SELECT * FROM Websites WHERE tenantId = 1')
+  const websites = await getWebsites()
   const items = websites.map(site => Object.assign({}, site, { isActive: req.url.includes(site.slug)}))
   
   res.locals.globals = {

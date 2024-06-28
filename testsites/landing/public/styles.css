@@ -1,0 +1,124 @@
+:root {
+  --font-color-primary: rgb(70, 70, 70);
+  --font-color-primary-lighter: rgb(109, 109, 109);
+  --font-color-primary-darker: rgb(41, 41, 41);
+}
+
+body {
+  font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: none;
+  width: 100%;
+  margin-top: 30px;
+  padding-right: 50px;
+}
+nav .logo {
+  display: flex;
+  justify-self: left;
+  align-items: center;
+  padding-left: 50px;
+  font-size: 20px;
+}
+
+nav ul {
+  display: inline-flex;
+  justify-content: right;
+  list-style-type: none;
+  align-items: center;
+  padding: 0;
+  margin-right: 40px;
+}
+
+nav a {
+  display: block;
+  padding: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: var(--font-color-primary);
+  color: white;
+  height: 35vh;
+  width: 100%;
+  padding: 80px 180px;
+}
+
+.section {
+  background-color: aliceblue;
+  padding: 80px 180px;
+}
+.section:nth-child(even) {
+  background-color: white;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 80px;
+}
+.col {
+  flex: 1;
+}
+
+input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+}
+label {
+  display: block;
+  margin-bottom: -5px;
+  color: var(--font-color-primary-lighter);
+}
+button, a.btn {
+  padding: 10px 20px;
+  background-color: var(--font-color-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+}
+button:hover, a.btn:hover {
+  background-color: var(--font-color-primary-lighter);
+}
+
+.lead {
+  font-size: 1em;
+  color: var(--font-color-primary-lighter);
+  margin-bottom: -25px;
+}
+
+h1 {
+  font-size: 2.3em;
+  margin-bottom: 20px;
+  color: var(--font-color-primary);
+}
+h2 {
+  font-size: 1.7em;
+  margin-bottom: 20px;
+  color: var(--font-color-primary);
+}
+h3 {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: var(--font-color-primary);
+}
+h4 {
+  font-size: 1em;
+  margin-bottom: 20px;
+  color: var(--font-color-primary);
+}
